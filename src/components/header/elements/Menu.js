@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button, Drawer } from "antd";
-import { useSelector, useDispatch } from "react-redux";
 import { CloseOutlined } from "@ant-design/icons";
-
-import productsData from "../../../data/product.json";
 import CartSidebar from "../../cart/CartSidebar";
 import WishlistSidebar from "../../wishlist/WishlistSidebar";
 import MenuSidebar from "./MenuSidebar";
 import SearchBar from "./SearchBar";
-import { getTotalProductInCart } from "../../../common/shopUtils";
 import Container from "../../other/Container";
 
-function Menu({ containerType }) {
-  const cartState = useSelector((state) => state.cartReducer);
-  const wishlistState = useSelector((state) => state.wishlistReducer);
+function Menu({ containerType, products, categories }) {
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
   const [menuSidebarOpen, setMenuSidebarOpen] = useState(false);
   const [wishlistSidebarOpen, setWishlistSidebarOpen] = useState(false);
@@ -37,12 +31,13 @@ function Menu({ containerType }) {
             </a>
             <div className="menu-logo">
               <Link href={process.env.PUBLIC_URL + "/"}>
-                  <h1>AlbVitaFitness</h1>
+                <h1>AlbVitaFitness</h1>
               </Link>
             </div>
             <SearchBar
-              fillData={productsData}
+              fillData={products}
               placeholder="What are you looking for ?"
+              categories={categories}
             />
             <div className="menu-functions">
               <Button>
@@ -61,7 +56,7 @@ function Menu({ containerType }) {
                   }
                   alt=""
                 />
-                <span>{wishlistState.length}</span>
+                <span>{0}</span>
               </div>
               <div
                 className="menu-function-item"
@@ -74,7 +69,7 @@ function Menu({ containerType }) {
                   }
                   alt=""
                 />
-                <span>{getTotalProductInCart(cartState)}</span>
+                <span>{0}</span>
               </div>
             </div>
           </div>
@@ -82,12 +77,12 @@ function Menu({ containerType }) {
       </div>
       <div className="menu-mobile-search">
         <Container>
-          <SearchBar fillData={productsData} placeholder="Searching..." />
+          <SearchBar fillData={products} categories={categories} placeholder="Searching..." />
         </Container>
       </div>
       <Drawer
         placement="right"
-        title={`Wishlist (${wishlistState.length})`}
+        title={`Wishlist 0`}
         closable={true}
         onClose={() => setWishlistSidebarOpen(false)}
         closeIcon={
@@ -103,7 +98,7 @@ function Menu({ containerType }) {
       </Drawer>
       <Drawer
         placement="right"
-        title={`Shopping cart (${getTotalProductInCart(cartState)})`}
+        title={`Shopping cart 0`}
         closable={true}
         onClose={() => setCartSidebarOpen(false)}
         closeIcon={

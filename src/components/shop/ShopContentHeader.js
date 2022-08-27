@@ -1,20 +1,46 @@
 import { Select } from "antd";
-import { useState, useEffect } from "react";
-import axios from "axios"
+import { useRouter } from "next/router";
+import { useState } from "react";
 
-function ShopContentHeader({ productPerPage }) {
+function ShopContentHeader({ productPerPage, productsCount }) {
   const { Option } = Select;
-  const [productsCount, setProductsCount] = useState(20)
+  const [valueSelected, setValueSelected] = useState("default");
+  const router = useRouter();
 
-  async function getProductsCountFromServer() {
-    const result = await axios.get("http://localhost:4000/productsCount")
-    setProductsCount(result.count)
-  }
-
-  useEffect(() => {
-    getProductsCountFromServer()
-  }, [])
-
+  const handleChange = (value) => {
+    if (value === "default") {
+      setValueSelected("default");
+      router.push("/");
+    } else if (value === "lowHigh") {
+      setValueSelected("lowHigh");
+      router.push(
+        `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
+          router.query.category ? `&category=${router.query.category}`: ""
+        }&sortBy=price&ascOrDesc=asc`
+      );
+    } else if (value === "highLow") {
+      setValueSelected("highLow");
+      router.push(
+        `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
+          router.query.category ? `&category=${router.query.category}`: ""
+        }&sortBy=price&ascOrDesc=desc`
+      );
+    } else if (value === "az") {
+      setValueSelected("az");
+      router.push(
+        `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
+          router.query.category ? `&category=${router.query.category}`: ""
+        }&sortBy=name&ascOrDesc=asc`
+      );
+    } else if (value === "za") {
+      setValueSelected("za");
+      router.push(
+        `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
+          router.query.category ? `&category=${router.query.category}`: ""
+        }&sortBy=name&ascOrDesc=desc`
+      );
+    }
+  };
   return (
     <div className="shop-content__header">
       <div className="shop-content__header-showing">
@@ -23,18 +49,19 @@ function ShopContentHeader({ productPerPage }) {
         </h5>
       </div>
       <div className="shop-content__header-filter">
-        <p>Filter by:</p>
+        <p>Filter products by:</p>
         <Select
           className="shop-content__header-filter__select"
-          // defaultValue={shopState.sort}
+          defaultValue={"default"}
           style={{ width: 250 / 16 + "em" }}
-          // onChange={handleChange}
+          value={valueSelected}
+          onChange={handleChange}
         >
-          <Option value="default">Default</Option>
+          <Option value="default">Default: No filters</Option>
           <Option value="lowHigh">Price: Low to High</Option>
           <Option value="highLow">Price: High to Low</Option>
-          <Option value="az">A to Z</Option>
-          <Option value="za">Z to A</Option>
+          <Option value="az">Name: A to Z</Option>
+          <Option value="za">Name: Z to A</Option>
         </Select>
       </div>
     </div>

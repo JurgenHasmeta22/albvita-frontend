@@ -14,13 +14,17 @@ function ShopLayout({
   productPerPage,
   productStyle,
   containerType,
+  products, 
+  productsCount, 
+  searchedProducts,
+  categories
 }) {
   return (
     <div className="shop-layout">
       <Container type={containerType}>
         <Row gutter={30}>
           <Col className="gutter-row" {...shopSidebarResponsive}>
-            <ShopSidebar />
+            <ShopSidebar categories={categories}/>
           </Col>
           <Col className="gutter-row" {...shopContentResponsive}>
             <ShopContent
@@ -28,6 +32,9 @@ function ShopLayout({
               productPerPage={productPerPage}
               fiveColumn={fiveColumn}
               productResponsive={productResponsive}
+              products={products}
+              productsCount={productsCount}
+              searchedProducts={searchedProducts}
             />
           </Col>
         </Row>

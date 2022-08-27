@@ -1,35 +1,36 @@
 import { useRouter } from "next/router";
-
 import LayoutOne from "../../components/layouts/LayoutOne";
 import { capitalizeFirstLetter } from "../../common/utils";
-import { getProductsBySlug } from "../../common/shopUtils";
-import productData from "../../data/product.json";
 import ProductDetailOne from "../../components/productDetail/ProductDetailOne";
 import { useState, useEffect } from "react";
-
 import axios from "axios"
 
-export default function pid() {
-  const router = useRouter();
-  const { slug } = router.query;
+export async function getServerSideProps(context) {
+  const { slug } = context.params;
+
+  const slugSplitted = slug
+    .split("")
+    .map((char) => (char === "-" ? " " : char))
+    .join("");
+
+  const res1 = await axios(`http://localhost:4000/products/${slugSplitted}`);
+  const product = res1.data;
+
+  return {
+    props: { product },
+  };
+}
+
+export default function pid({product}) {
   
-  const [product, setProduct] = useState(null)
-
-  async function getProductFromServer() {
-    const result = await axios.get(`http://localhost:4000/products/${slug}`)
-    setProduct(result.data)
-  }
-
-  useEffect(() => {
-    getProductFromServer()
-  }, [slug])
+  const [productFromServer, setProductFromServer] = useState(product)
 
   return (
     <LayoutOne
-      title={product && capitalizeFirstLetter(product.name)}
+      title={productFromServer && capitalizeFirstLetter(productFromServer.name)}
       clearSpaceTop
     >
-      {product && <ProductDetailOne data={product} />}
+      {productFromServer && <ProductDetailOne product={productFromServer} />}
     </LayoutOne>
   );
 }

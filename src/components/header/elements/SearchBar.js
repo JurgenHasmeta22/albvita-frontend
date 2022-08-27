@@ -1,47 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Select, Button, AutoComplete } from 'antd';
 import { useRouter } from 'next/router';
-
-import { SHOP } from '../../../common/defines';
-import { getProductsByCategory } from '../../../common/shopUtils';
 import useDebounce from '../../../common/useDebound';
 import axios from "axios"
 
-function SearchBarMobile({ fillData, placeholder }) {
+function SearchBarMobile({ fillData, placeholder, categories }) {
     const { Option } = Select;
     const router = useRouter();
-
     const [search, setSearch] = useState('');
-    const [categories, setCategories] = useState([]);
-    const [products, setProducts] = useState([]);
-
     const [showDropdownOptions, setShowDropdownOptions] = useState(false);
     const deboundValue = useDebounce(search, 300);
-
-    async function getCategoriesFromServer() {
-        const result = await axios.get('http://localhost:4000/categories');
-        setCategories(result.data);
+    const [categoriesFromServer, setCategoriesFromServer] = useState([])
+    
+    async function getCategories() {
+        const res = await axios.get("http://localhost:4000/categories")
+        console.log(res.data)
+        setCategoriesFromServer(res.data)
     }
-
-    async function getProductsFromServer() {
-        const result = await axios.get('http://localhost:4000/products');
-        // console.log(result)
-        setProducts(result.data);
-    }
-
     useEffect(() => {
-        getCategoriesFromServer();
-        getProductsFromServer();
-    }, []);
+        getCategories()
+    },[])
 
     const openDropdownOption = (value) => {
         setShowDropdownOptions(true);
     };
-
     const closeDropdownOption = () => {
         setShowDropdownOptions(false);
     };
-
     const onSelectOption = (value, option) => {
         closeDropdownOption();
     };
@@ -51,12 +36,15 @@ function SearchBarMobile({ fillData, placeholder }) {
             <div className='menu-search__form'>
                 <Select
                     className='menu-search__form-select'
-                    // defaultValue={globalState.category}
+                    defaultValue={"All"}
                     style={{ width: 150 }}
                     // onChange={onSelectCateory}
                     // value={globalState.category}
                 >
-                    {categories.map((item, index) => (
+                    <Option key={"All"} value={"All"}>
+                        All Products
+                    </Option>
+                    {categoriesFromServer.map((item, index) => (
                         <Option key={index} value={item.name}>
                             {item.name}
                         </Option>
@@ -70,13 +58,13 @@ function SearchBarMobile({ fillData, placeholder }) {
                         // onSearch={openDropdownOption}
                         // onBlur={closeDropdownOption}
                         // onSelect={onSelectOption}
-                        options={products}
+                        // options={products}
                         placeholder={placeholder}
-                        filterOption={(inputValue, option) =>
-                            option.value
-                                .toUpperCase()
-                                .indexOf(inputValue.toUpperCase()) !== -1
-                        }
+                        // filterOption={(inputValue, option) =>
+                        //     option.value
+                        //         .toUpperCase()
+                        //         .indexOf(inputValue.toUpperCase()) !== -1
+                        // }
                     />
                     <Button>
                         <i className='icon_search' />

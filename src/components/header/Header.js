@@ -3,7 +3,7 @@ import React from "react";
 import Menu from "./elements/Menu";
 import TopNav from "./elements/TopNav";
 
-function Header({ containerType, headerStyle }) {
+function Header({ containerType, headerStyle, products, categories }) {
   const renderStyleClass = (type) => {
     switch (type) {
       case "two":
@@ -15,7 +15,7 @@ function Header({ containerType, headerStyle }) {
   return (
     <div className={`header-one ${renderStyleClass(headerStyle)}`}>
       {/* <TopNav containerType={containerType} /> */}
-      <Menu containerType={containerType} />
+      <Menu containerType={containerType} products={products} categories={categories} />
     </div>
   );
 }

@@ -15,6 +15,8 @@ function LayoutOne({
   containerType,
   children,
   clearSpaceTop,
+  products,
+  categories
 }) {
   message.config({
     maxCount: 3,
@@ -25,7 +27,7 @@ function LayoutOne({
       <Head>
         <title>{title}</title>
       </Head>
-      <ScrollHeader headerStyle={headerStyle} containerType={containerType} />
+      <ScrollHeader headerStyle={headerStyle} containerType={containerType} products={products} categories={categories}/>
       <div className={`content ${classNames({ "clear-top": clearSpaceTop })}`}>
         {children}
       </div>

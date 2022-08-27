@@ -5,20 +5,17 @@ function ProductDetailReviewItem({ data }) {
   return (
     <div className="product-detail-review-item">
       <div className="product-detail-review-item__avatar">
-        <img
+        {/* <img
           src="https://thispersondoesnotexist.com/image"
           alt="Reviewer avatar"
-        />
+        /> */}
         <Rate disabled defaultValue={4} />
       </div>
       <div className="product-detail-review-item__content">
-        <h5>May 04, 2020</h5>
-        <h3>John smith</h3>
+        <h5>August 27, 2022</h5>
+        <h3>Jurgen Hasmeta</h3>
         <p>
-          As a result of innovations in orthodontic materials, orthodontists are
-          able to provide today’s patients with a comfortable and convenient
-          experience while working toward the ultimate goal of a healthy, a good
-          bite and improved facial appearance.
+          Rewiew here
         </p>
       </div>
     </div>

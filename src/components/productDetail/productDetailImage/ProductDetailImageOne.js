@@ -55,24 +55,8 @@ function ProductDetailImageOne({ imageData }) {
             lg={{ span: 6, order: 1 }}
             xl={4}
           >
-            <div className="product-detail-image-one-small">
-              <Slider
-                asNavFor={nav1}
-                ref={(c) => setNav2(c)}
-                {...slider2Settings}
-              >
-                {/* {imageData &&
-                  imageData.map((img, index) => ( */}
-                    <div className="slider-item">
-                      <img
-                        src={`http://localhost:4000${imageData}`}
-                        alt="Product image"
-                      />
-                    </div>
-                  {/* ))} */}
-              </Slider>
-            </div>
           </Col>
+          
           <Col
             span={24}
             xs={{ order: 1 }}
