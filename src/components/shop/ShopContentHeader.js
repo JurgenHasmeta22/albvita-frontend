@@ -15,28 +15,28 @@ function ShopContentHeader({ productPerPage, productsCount }) {
       setValueSelected("lowHigh");
       router.push(
         `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
-          router.query.category ? `&category=${router.query.category}`: ""
+          router.query.category ? `&category=${router.query.category}` : ""
         }&sortBy=price&ascOrDesc=asc`
       );
     } else if (value === "highLow") {
       setValueSelected("highLow");
       router.push(
         `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
-          router.query.category ? `&category=${router.query.category}`: ""
+          router.query.category ? `&category=${router.query.category}` : ""
         }&sortBy=price&ascOrDesc=desc`
       );
     } else if (value === "az") {
       setValueSelected("az");
       router.push(
         `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
-          router.query.category ? `&category=${router.query.category}`: ""
+          router.query.category ? `&category=${router.query.category}` : ""
         }&sortBy=name&ascOrDesc=asc`
       );
     } else if (value === "za") {
       setValueSelected("za");
       router.push(
         `/?page=${router.query.page !== 1 ? "1" : router.query.page}${
-          router.query.category ? `&category=${router.query.category}`: ""
+          router.query.category ? `&category=${router.query.category}` : ""
         }&sortBy=name&ascOrDesc=desc`
       );
     }

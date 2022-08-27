@@ -26,7 +26,11 @@ function ShopSidebar({ categories }) {
               <a
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push(`/?page=${router.query.page !== "1" ? "1" : router.query.page}&category=all`)
+                  router.push(
+                    `/?page=${
+                      router.query.page !== "1" ? "1" : router.query.page
+                    }&category=all`
+                  );
                 }}
               >
                 All Categories
@@ -41,14 +45,18 @@ function ShopSidebar({ categories }) {
                   active: false,
                 })}
               >
-                  <a
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push(`/?page=${router.query.page !== "1" ? "1" : router.query.page}&category=${item.name}`)
-                    }}
-                  >
-                    {item.name}
-                  </a>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push(
+                      `/?page=${
+                        router.query.page !== "1" ? "1" : router.query.page
+                      }&category=${item.name}`
+                    );
+                  }}
+                >
+                  {item.name}
+                </a>
               </li>
             ))}
         </ul>

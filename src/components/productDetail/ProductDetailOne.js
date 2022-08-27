@@ -20,13 +20,16 @@ function ProductDetailLayoutOne({ product }) {
               <ProductDetailImageOne imageData={product.image} />
             </Col>
             <Col span={24} md={12}>
-              <ProductDetailContentOne product={product} quantityControllerNoRound />
+              <ProductDetailContentOne
+                product={product}
+                quantityControllerNoRound
+              />
             </Col>
           </Row>
         </Container>
       </div>
       <div className="product-detail-one-bottom">
-        <ProductDetailTabOne product={product}/>
+        <ProductDetailTabOne product={product} />
       </div>
     </div>
   );

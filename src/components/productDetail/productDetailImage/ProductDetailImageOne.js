@@ -54,9 +54,8 @@ function ProductDetailImageOne({ imageData }) {
             md={{ span: 24, order: 2 }}
             lg={{ span: 6, order: 1 }}
             xl={4}
-          >
-          </Col>
-          
+          ></Col>
+
           <Col
             span={24}
             xs={{ order: 1 }}
@@ -73,14 +72,14 @@ function ProductDetailImageOne({ imageData }) {
               >
                 {/* {imageData &&
                   imageData.map((img, index) => ( */}
-                    <div className="slider-item">
-                      <ZoomImage
-                        disableOnMobile
-                        src={`http://localhost:4000${imageData}`}
-                        alt="Product image"
-                      />
-                    </div>
-                  {/* ))} */}
+                <div className="slider-item">
+                  <ZoomImage
+                    disableOnMobile
+                    src={`http://localhost:4000${imageData}`}
+                    alt="Product image"
+                  />
+                </div>
+                {/* ))} */}
               </Slider>
             </div>
           </Col>

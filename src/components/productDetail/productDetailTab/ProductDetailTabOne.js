@@ -5,7 +5,7 @@ import ProductDetailReviewItem from "../elements/ProductDetailReviewItem";
 
 const { TabPane } = Tabs;
 
-export default function ProductDetailTabOne({product}) {
+export default function ProductDetailTabOne({ product }) {
   return (
     <div className="product-detail-tab-one">
       <Container>
@@ -13,9 +13,7 @@ export default function ProductDetailTabOne({product}) {
           <TabPane tab="Description" key="1">
             <div className="product-detail-tab-item -description">
               <h5 className="tab-title">Products Infomation</h5>
-              <p className="tab-des">
-                {product.description}
-              </p>
+              <p className="tab-des">{product.description}</p>
             </div>
           </TabPane>
           <TabPane tab="Customer Reviews(1)" key="2">

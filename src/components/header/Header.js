@@ -15,7 +15,11 @@ function Header({ containerType, headerStyle, products, categories }) {
   return (
     <div className={`header-one ${renderStyleClass(headerStyle)}`}>
       {/* <TopNav containerType={containerType} /> */}
-      <Menu containerType={containerType} products={products} categories={categories} />
+      <Menu
+        containerType={containerType}
+        products={products}
+        categories={categories}
+      />
     </div>
   );
 }

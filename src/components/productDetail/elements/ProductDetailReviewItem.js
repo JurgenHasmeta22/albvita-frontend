@@ -14,9 +14,7 @@ function ProductDetailReviewItem({ data }) {
       <div className="product-detail-review-item__content">
         <h5>August 27, 2022</h5>
         <h3>Jurgen Hasmeta</h3>
-        <p>
-          Rewiew here
-        </p>
+        <p>Rewiew here</p>
       </div>
     </div>
   );

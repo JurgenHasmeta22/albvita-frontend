@@ -46,4 +46,4 @@ export default function withReduxStor(App) {
       return <App {...this.props} reduxStore={this.reduxStore} />;
     }
   };
-};
+}

@@ -6,11 +6,7 @@ import { checkAvaiableQuantityToAdd } from "../../../common/shopUtils";
 import QuantitySelector from "../../controls/QuantitySelector";
 import ProductGuaranteed from "../elements/ProductGuaranteed";
 
-function ProductDetailContentOne({
-  product,
-  hideGuaranteed,
-  showCountdown,
-}) {
+function ProductDetailContentOne({ product, hideGuaranteed, showCountdown }) {
   return (
     <div className="product-detail-content-one">
       <h3>{product.name}</h3>
@@ -75,10 +71,7 @@ function ProductDetailContentOne({
         </>
       )}
       <div className="product-detail-content-one-actions">
-        <QuantitySelector
-          defaultValue={1}
-          size="big"
-        />
+        <QuantitySelector defaultValue={1} size="big" />
         <Button
           disabled={true}
           className={`product-detail-content-one-atc ${classNames({

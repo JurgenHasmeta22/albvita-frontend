@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
+    "pretty": "prettier --write \"./**/*.{js,jsx,tsx,css,scss,ts,json,prisma}\"",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {

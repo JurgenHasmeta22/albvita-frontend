@@ -24,8 +24,7 @@ module.exports = withLess(
       javascriptEnabled: true,
     },
     images: {
-          domains: ['localhost'],
-      }
+      domains: ["localhost"],
+    },
   })
 );
-

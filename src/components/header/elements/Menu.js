@@ -77,7 +77,11 @@ function Menu({ containerType, products, categories }) {
       </div>
       <div className="menu-mobile-search">
         <Container>
-          <SearchBar fillData={products} categories={categories} placeholder="Searching..." />
+          <SearchBar
+            fillData={products}
+            categories={categories}
+            placeholder="Searching..."
+          />
         </Container>
       </div>
       <Drawer

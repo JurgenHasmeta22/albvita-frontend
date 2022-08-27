@@ -9,7 +9,11 @@ export async function getServerSideProps(context) {
   //   .join("");
   const url = `http://localhost:4000/products/page/${
     context.query.page ? context.query.page : "1"
-  }${context.query.category ? `?category=${context.query.category}` : "?category=all"}
+  }${
+    context.query.category
+      ? `?category=${context.query.category}`
+      : "?category=all"
+  }
   ${
     context.query.sortBy === "price"
       ? `&sortBy=price`

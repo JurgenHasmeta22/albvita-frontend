@@ -7,13 +7,16 @@ function ShopContent({
   productResponsive,
   productPerPage,
   productStyle,
-  products, 
-  productsCount, 
+  products,
+  productsCount,
   searchedProducts,
 }) {
   return (
     <div className="shop-content">
-      <ShopContentHeader productPerPage={productPerPage} productsCount={productsCount}/>
+      <ShopContentHeader
+        productPerPage={productPerPage}
+        productsCount={productsCount}
+      />
       <ShopContentProduct
         productStyle={productStyle}
         fiveColumn={fiveColumn}

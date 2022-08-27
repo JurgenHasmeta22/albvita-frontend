@@ -3,7 +3,7 @@ import LayoutOne from "../../components/layouts/LayoutOne";
 import { capitalizeFirstLetter } from "../../common/utils";
 import ProductDetailOne from "../../components/productDetail/ProductDetailOne";
 import { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 
 export async function getServerSideProps(context) {
   const { slug } = context.params;
@@ -21,9 +21,8 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function pid({product}) {
-  
-  const [productFromServer, setProductFromServer] = useState(product)
+export default function pid({ product }) {
+  const [productFromServer, setProductFromServer] = useState(product);
 
   return (
     <LayoutOne
