@@ -13,8 +13,7 @@ function SearchBarMobile({ fillData, placeholder, categories }) {
   const [categoriesFromServer, setCategoriesFromServer] = useState([]);
 
   async function getCategories() {
-    const res = await axios.get("http://localhost:4000/categories");
-    console.log(res.data);
+    const res = await axios.get("http://localhost:4000/getAllCategories");
     setCategoriesFromServer(res.data);
   }
   useEffect(() => {

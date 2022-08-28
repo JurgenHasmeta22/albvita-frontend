@@ -57,10 +57,7 @@ function Product({ data, productStyle, productImage }) {
           <Link
             href={
               process.env.PUBLIC_URL +
-              `product/${data.name
-                .split("")
-                .map((char) => (char === " " ? "-" : char))
-                .join("")}`
+              `product/${data.name}`
             }
             as={
               process.env.PUBLIC_URL +

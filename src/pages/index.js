@@ -7,7 +7,7 @@ export async function getServerSideProps(context) {
   //   ?.split("")
   //   .map((char) => (char === " " ? "-" : char))
   //   .join("");
-  const url = `http://localhost:4000/products/page/${
+  const url = `http://localhost:4000/getAllProducts/page/${
     context.query.page ? context.query.page : "1"
   }${
     context.query.category
@@ -24,10 +24,10 @@ export async function getServerSideProps(context) {
       : `${context.query.ascOrDesc === "desc" ? `&ascOrDesc=desc` : ""}`
   }`;
 
-  const res1 = await axios(url);
+  const res1 = await axios.get(url);
   const products = res1.data;
 
-  const res2 = await axios(`http://localhost:4000/productsCount`);
+  const res2 = await axios.get(`http://localhost:4000/getAllProductsCount`);
   const productsCount = res2.data;
 
   const productPayload = {
@@ -38,12 +38,12 @@ export async function getServerSideProps(context) {
   };
 
   const res3 = await axios.post(
-    `http://localhost:4000/searchProductsByName`,
+    `http://localhost:4000/searchProductNameByCategory`,
     productPayload
   );
   const searchedProducts = res3.data;
 
-  const res4 = await axios.get(`http://localhost:4000/categories`);
+  const res4 = await axios.get(`http://localhost:4000/getAllCategories`);
   const categories = res4.data;
 
   return {

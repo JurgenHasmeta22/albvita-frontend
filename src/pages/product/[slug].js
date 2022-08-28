@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
     .map((char) => (char === "-" ? " " : char))
     .join("");
 
-  const res1 = await axios(`http://localhost:4000/products/${slugSplitted}`);
+  const res1 = await axios.get(`http://localhost:4000/getProductByName/${slugSplitted}`);
   const product = res1.data;
 
   return {

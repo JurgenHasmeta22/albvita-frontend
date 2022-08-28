@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Modal, message } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-
-import { formatCurrency } from "../../common/utils";
 import QuantitySelector from "../controls/QuantitySelector";
-import {
-  removeFromCart,
-  decreaseQuantityCart,
-  increaseQuantityCart,
-} from "../../redux/actions/cartActions";
 
-function CartSidebarItem({ data }) {
-  const dispatch = useDispatch();
+function CartSidebarItem({
+  product,
+  quantity,
+  handleQuantityIncreaseChange,
+  handleQuantityDecreaseChange,
+  basketItem,
+}) {
   const [visible, setVisible] = useState(false);
-  const [quantity, setQuantity] = useState(data.cartQuantity);
-  const globalState = useSelector((state) => state.globalReducer);
-  const { currency, locales } = globalState.currency;
+
   const onRemoveProductFromCart = (e) => {
     e.preventDefault();
     showModal();
@@ -24,49 +19,39 @@ function CartSidebarItem({ data }) {
   const showModal = () => {
     setVisible(true);
   };
-
   const handleOk = (e) => {
-    dispatch(removeFromCart(data.cartId));
     setVisible(false);
     return message.error("Product removed from cart");
   };
-
   const handleCancel = (e) => {
     setVisible(false);
   };
+
   return (
     <>
       <div className="cart-sidebar-item">
         <div className="cart-sidebar-item__image">
-          <img src={data.thumbImage[0]} alt="Product image" />
+          <img
+            src={`http://localhost:4000${product.image}`}
+            alt="Product image"
+          />
         </div>
         <div className="cart-sidebar-item__content">
           <Link
             href={process.env.PUBLIC_URL + `/product/[slug]`}
-            as={process.env.PUBLIC_URL + `/product/${data.slug}`}
+            as={process.env.PUBLIC_URL + `/product/${product.name}`}
           >
-            <a>{data.name}</a>
+            <a>{product.name}</a>
           </Link>
-          <h5>
-            {data.discount
-              ? formatCurrency(
-                  (data.price - data.discount) * data.cartQuantity,
-                  locales,
-                  currency
-                )
-              : formatCurrency(
-                  data.price * data.cartQuantity,
-                  locales,
-                  currency
-                )}
-          </h5>
+          <span>Quantity: {quantity}</span>
+          <h5>Total Price: {Number(product.price) * Number(quantity)} $</h5>
           <QuantitySelector
             size="small"
-            defaultValue={data.cartQuantity}
+            defaultValue={product.quantity}
             min={1}
-            max={data.quantity}
-            onDecrease={() => dispatch(decreaseQuantityCart(data.cartId))}
-            onIncrease={() => dispatch(increaseQuantityCart(data.cartId))}
+            max={product.stock}
+            onDecrease={() => handleQuantityDecreaseChange(basketItem.id)}
+            onIncrease={() => handleQuantityIncreaseChange(basketItem.id)}
           />
         </div>
         <div className="cart-sidebar-item__close">

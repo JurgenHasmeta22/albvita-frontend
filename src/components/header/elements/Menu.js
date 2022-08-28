@@ -102,7 +102,7 @@ function Menu({ containerType, products, categories }) {
       </Drawer>
       <Drawer
         placement="right"
-        title={`Shopping cart 0`}
+        title={`Shopping cart`}
         closable={true}
         onClose={() => setCartSidebarOpen(false)}
         closeIcon={
