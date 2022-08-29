@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Modal, message } from "antd";
 import QuantitySelector from "../controls/QuantitySelector";
+import axios from "axios"
 
 function CartSidebarItem({
   product,
@@ -47,11 +48,11 @@ function CartSidebarItem({
           <h5>Total Price: {Number(product.price) * Number(quantity)} $</h5>
           <QuantitySelector
             size="small"
-            defaultValue={product.quantity}
+            defaultValue={quantity}
             min={1}
             max={product.stock}
-            onDecrease={() => handleQuantityDecreaseChange(basketItem.id)}
-            onIncrease={() => handleQuantityIncreaseChange(basketItem.id)}
+            onDecrease={() => handleQuantityDecreaseChange(basketItem.id, quantity, product.id)}
+            onIncrease={() => handleQuantityIncreaseChange(basketItem.id, quantity, product.id)}
           />
         </div>
         <div className="cart-sidebar-item__close">

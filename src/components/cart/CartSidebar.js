@@ -8,7 +8,7 @@ function CartSidebar() {
   const [basket, setBasket] = useState([]);
 
   async function getUserBought() {
-    const res = await axios.get(`http://localhost:4000/getUserById/2`);
+    const res = await axios.get(`http://localhost:4000/getUserById/1`);
     const basket = res.data.boughtItems;
     setBasket(basket);
   }
@@ -17,11 +17,25 @@ function CartSidebar() {
     getUserBought();
   }, []);
 
-  function handleQuantityIncreaseChange(basketId) {
-    console.log(basketId)
+  async function handleQuantityIncreaseChange(basketId, productId, productQuantity) {
+    const request = {
+      userId: 1,
+      productId,
+      quantity: productQuantity + 1
+    }
+    const res = await axios.patch(`http://localhost:4000/updateBought/${basketId}`, request)
+    console.log(res.data.userUpdated)
+    setBasket(res.data.userUpdated.boughtItems)
   }
-  function handleQuantityDecreaseChange(basketId) {
-    console.log(basketId)
+  async function handleQuantityDecreaseChange(basketId, productId, productQuantity) {
+    const request = {
+      userId: 1,
+      productId,
+      quantity: productQuantity - 1
+    }
+    const res = await axios.patch(`http://localhost:4000/updateBought/${basketId}`, request)
+    console.log(res.data.userUpdated)
+    setBasket(res.data.userUpdated.boughtItems)
   }
 
   return basket.length === 0 ? (
