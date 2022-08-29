@@ -8,7 +8,7 @@ import MenuSidebar from "./MenuSidebar";
 import SearchBar from "./SearchBar";
 import Container from "../../other/Container";
 
-function Menu({ containerType, products, categories }) {
+function Menu({ containerType, products, categories, boughtCount, wishlistCount }) {
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
   const [menuSidebarOpen, setMenuSidebarOpen] = useState(false);
   const [wishlistSidebarOpen, setWishlistSidebarOpen] = useState(false);
@@ -56,7 +56,7 @@ function Menu({ containerType, products, categories }) {
                   }
                   alt=""
                 />
-                <span>{0}</span>
+                <span>{wishlistCount}</span>
               </div>
               <div
                 className="menu-function-item"
@@ -69,7 +69,7 @@ function Menu({ containerType, products, categories }) {
                   }
                   alt=""
                 />
-                <span>{0}</span>
+                <span>{boughtCount}</span>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ function Menu({ containerType, products, categories }) {
       </div>
       <Drawer
         placement="right"
-        title={`Wishlist 0`}
+        title={`Wishlist`}
         closable={true}
         onClose={() => setWishlistSidebarOpen(false)}
         closeIcon={

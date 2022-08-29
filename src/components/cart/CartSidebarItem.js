@@ -10,6 +10,7 @@ function CartSidebarItem({
   handleQuantityIncreaseChange,
   handleQuantityDecreaseChange,
   basketItem,
+  handleDeletingFromBasket
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -22,6 +23,7 @@ function CartSidebarItem({
   };
   const handleOk = (e) => {
     setVisible(false);
+    handleDeletingFromBasket(basketItem.id)
     return message.error("Product removed from cart");
   };
   const handleCancel = (e) => {
@@ -51,8 +53,8 @@ function CartSidebarItem({
             defaultValue={quantity}
             min={1}
             max={product.stock}
-            onDecrease={() => handleQuantityDecreaseChange(basketItem.id, quantity, product.id)}
-            onIncrease={() => handleQuantityIncreaseChange(basketItem.id, quantity, product.id)}
+            onDecrease={() => handleQuantityDecreaseChange(basketItem.id, product.id, quantity)}
+            onIncrease={() => handleQuantityIncreaseChange(basketItem.id, product.id, quantity)}
           />
         </div>
         <div className="cart-sidebar-item__close">
