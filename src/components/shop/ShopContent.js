@@ -11,6 +11,9 @@ function ShopContent({
   productsCount,
   searchedProducts,
 }) {
+  // const { productsCount, categories } = useSelector((state) => state.home);
+  // const dispatch = useDispatch();
+
   return (
     <div className="shop-content">
       <ShopContentHeader

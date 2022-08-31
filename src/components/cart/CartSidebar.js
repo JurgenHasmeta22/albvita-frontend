@@ -1,21 +1,17 @@
 import { Empty, Button } from 'antd';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CartSidebarItem from './CartSidebarItem';
 import axios from 'axios';
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setBasketItems,
+    setUser
+} from "../../toolkitStore/homeSlice"
 
 function CartSidebar() {
-    const [basket, setBasket] = useState([]);
-
-    async function getUserBought() {
-        const res = await axios.get(`http://localhost:4000/getUserById/1`);
-        const basket = res.data.boughtItems;
-        setBasket(basket);
-    }
-
-    useEffect(() => {
-        getUserBought();
-    }, []);
+    const { basketItems, user } = useSelector((state) => state.home);
+    const dispatch = useDispatch();
 
     async function handleQuantityIncreaseChange(
         basketId,
@@ -31,7 +27,8 @@ function CartSidebar() {
             `http://localhost:4000/updateBoughtItemById/${basketId}`,
             request
         );
-        setBasket(res.data.userUpdated.boughtItems);
+        dispatch(setUser(res.data.updatedUser));
+        // dispatch(setBasketItems(res.data.userUpdated.boughtItems));
     }
     async function handleQuantityDecreaseChange(
         basketId,
@@ -52,7 +49,8 @@ function CartSidebar() {
             `http://localhost:4000/updateBoughtItemById/${basketId}`,
             request
         );
-        setBasket(res.data.userUpdated.boughtItems);
+        dispatch(setUser(res.data.updatedUser));
+        // dispatch(setBasketItems(res.data.userUpdated.boughtItems));
     }
     async function handleDeletingFromBasket(basketId) {
         const request = {
@@ -62,15 +60,16 @@ function CartSidebar() {
             `http://localhost:4000/deleteBoughtItemById/${basketId}`,
             request
         );
-        setBasket(res.data.updatedUser.boughtItems);
+        dispatch(setUser(res.data.updatedUser));
+        // dispatch(setBasketItems(res.data.updatedUser.boughtItems));
     }
 
-    return basket?.length === 0 ? (
+    return user?.boughtItems?.length === 0 ? (
         <Empty description='No products in cart' />
     ) : (
         <div className='cart-sidebar'>
             <div className='cart-sidebar-products'>
-                {basket?.map((item, index) => (
+                {user?.boughtItems?.map((item, index) => (
                     <CartSidebarItem
                         key={index}
                         product={item.product}
@@ -87,7 +86,7 @@ function CartSidebar() {
                 ))}
             </div>
             <div className='cart-sidebar-total'>
-                <h5>Total: {basket.length}</h5>
+                <h5>Total: {user?.boughtItems?.length}</h5>
                 <div className='cart-sidebar-total__buttons'>
                     <Button type='primary' shape='round'>
                         <Link href={process.env.PUBLIC_URL + '/shop/checkout'}>

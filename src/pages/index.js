@@ -1,12 +1,13 @@
 import LayoutOne from "../components/layouts/LayoutOne";
 import ShopLayout from "../components/shop/ShopLayout";
 import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setUser
+} from "../toolkitStore/homeSlice"
 
 export async function getServerSideProps(context) {
-  // const categoryFormat = context.query?.category
-  //   ?.split("")
-  //   .map((char) => (char === " " ? "-" : char))
-  //   .join("");
   const url = `http://localhost:4000/getAllProducts/page/${
     context.query.page ? context.query.page : "1"
   }${
@@ -46,8 +47,11 @@ export async function getServerSideProps(context) {
   const res4 = await axios.get(`http://localhost:4000/getAllCategories`);
   const categories = res4.data;
 
+  const res5 = await axios.get(`http://localhost:4000/getUserById/1`);
+  const user = res5.data;
+
   return {
-    props: { products, productsCount, searchedProducts, categories },
+    props: { products, productsCount, searchedProducts, categories, user },
   };
 }
 
@@ -56,7 +60,12 @@ export default function Home({
   productsCount,
   searchedProducts,
   categories,
+  user
 }) {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setUser(user))
+  }, [])
   return (
     <LayoutOne
       title="AlbVitaFitness - Your fitness store of choice"

@@ -97,10 +97,10 @@ function ShopContentProduct({
         <Empty description="No products in this category" />
       ) : (
         <>
-          {products.length > 0 ? (
+          {products?.length > 0 ? (
             <>
               <Row gutter={[{ xs: 5, sm: 5, xl: 15, xxl: 30 }, 30]}>
-                {products.map((product, index) => (
+                {products?.map((product, index) => (
                   <Col
                     key={index}
                     className={classNames({ "five-col": fiveColumn })}
@@ -114,7 +114,7 @@ function ShopContentProduct({
                   </Col>
                 ))}
               </Row>
-              {products.length >= productPerPage && (
+              {products?.length >= productPerPage && (
                 <Pagination
                   classNames="shop-content__product-pagination"
                   defaultCurrent={1}

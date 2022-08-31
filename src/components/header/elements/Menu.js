@@ -7,8 +7,15 @@ import WishlistSidebar from "../../wishlist/WishlistSidebar";
 import MenuSidebar from "./MenuSidebar";
 import SearchBar from "./SearchBar";
 import Container from "../../other/Container";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setUser
+} from "../../../toolkitStore/homeSlice"
 
-function Menu({ containerType, products, categories, boughtCount, wishlistCount }) {
+function Menu({ containerType, products, categories }) {
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.home);
+
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
   const [menuSidebarOpen, setMenuSidebarOpen] = useState(false);
   const [wishlistSidebarOpen, setWishlistSidebarOpen] = useState(false);
@@ -56,7 +63,7 @@ function Menu({ containerType, products, categories, boughtCount, wishlistCount 
                   }
                   alt=""
                 />
-                <span>{wishlistCount}</span>
+                <span>{user?.wishlistItems?.length}</span>
               </div>
               <div
                 className="menu-function-item"
@@ -69,7 +76,7 @@ function Menu({ containerType, products, categories, boughtCount, wishlistCount 
                   }
                   alt=""
                 />
-                <span>{boughtCount}</span>
+                <span>{user?.boughtItems?.length}</span>
               </div>
             </div>
           </div>
